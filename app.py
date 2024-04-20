@@ -653,8 +653,7 @@ def shoppinglist():
 
     return render_template("shopping_list.html", products=products, recommendations=recommendations, recommended_products=recommended_products, total_price=total_price)
 
-if __name__ == '__main__':
-    signal.signal(signal.SIGINT, signal_handler)
 
 if __name__ == '__main__':
+    signal.signal(signal.SIGINT, signal_handler)
     app.run(port=8502)
