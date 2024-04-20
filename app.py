@@ -11,6 +11,11 @@ from bson import ObjectId
 import os
 import requests
 import random
+import signal
+import threading
+
+def signal_handler(sig, frame):
+    print('Signal handler called with signal', sig)
 
 app = Flask(__name__)
 CORS(app)
@@ -647,6 +652,9 @@ def shoppinglist():
     recommendations = recommend_products([product['Product_Name'] for product in shopping_list], probabilities)
 
     return render_template("shopping_list.html", products=products, recommendations=recommendations, recommended_products=recommended_products, total_price=total_price)
+
+if __name__ == '__main__':
+    signal.signal(signal.SIGINT, signal_handler)
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
